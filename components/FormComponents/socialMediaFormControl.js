@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 export default function Link(props) {
   const [inputs, setInputs] = useState({ select: "facebook", input: "" });
-
   const { onChange } = props;
-
+  const selectRef = useRef();
+  const inputRef = useRef();
   const socialMediaLinksMap = {
     Facebook: "facebook",
     Instagram: "instagram",
@@ -15,10 +15,17 @@ export default function Link(props) {
   };
   const handleInputChange = (event) => {
     event.persist();
-    setInputs((inputs) => ({
-      ...inputs,
-      [event.target.name]: (event.target.name==="select")?Object.values(socialMediaLinksMap)[event.target.selectedIndex]:event.target.value,
-    }));
+
+    // setInputs((inputs) => ({
+    //   ...inputs,
+    //   [event.target.name]: (event.target.name==="select")?Object.values(socialMediaLinksMap)[event.target.selectedIndex]:event.target.value,
+    // }));
+    setInputs({
+      select: Object.values(socialMediaLinksMap)[
+        selectRef.current.selectedIndex
+      ],
+      input: inputRef.current.value,
+    });
   };
   useEffect(() => {
     onChange({
@@ -31,7 +38,7 @@ export default function Link(props) {
       <div className="field has-addons">
         <p className="control">
           <span className="select">
-            <select name="select" onChange={handleInputChange}>
+            <select ref={selectRef} name="select" onChange={handleInputChange}>
               {Object.keys(socialMediaLinksMap).map((link) => (
                 <option>{link}</option>
               ))}
@@ -40,8 +47,9 @@ export default function Link(props) {
         </p>
         <p className="control">
           <input
+            ref={inputRef}
             className="input"
-            type="url"
+            type={inputs.select==="envelope"?"email":"url"}
             placeholder="URL"
             onChange={handleInputChange}
             name="input"

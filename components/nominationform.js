@@ -3,9 +3,15 @@ import LinksGroup from "./FormComponents/socialMediaFormGroup";
 import TextArea from "./FormComponents/TextArea";
 import TextField from "./FormComponents/TextField";
 import base64 from "base-64";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import Modal from "./modal";
 
 export default function NominationForm() {
+  const [modal, setModal] = useState({
+    message: "Test",
+    success: true,
+    show: false,
+  });
   function nominate() {
     for (let key in Object.keys(inputs)) {
       if (!inputs[key]) delete inputs[key];
@@ -22,7 +28,23 @@ export default function NominationForm() {
           username: inputs.name.toLowerCase().replace(/ /g, ""),
         },
       }),
-    });
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.body) {
+          setModal({
+            message: JSON.parse(data.body).message,
+            success: false,
+            show: true,
+          });
+        } else {
+          setModal({
+            message: "Form Submitted",
+            success: true,
+            show: true,
+          });
+        }
+      });
   }
   const { inputs, handleInputChange, handleSubmit } = useNominationForm(
     nominate
@@ -43,7 +65,15 @@ export default function NominationForm() {
 
   const formRef = useRef();
   const validate = () => {
+    return true;
     return formRef.current.reportValidity();
+  };
+  const closeModal = () => {
+    setModal({
+      message: "",
+      success: true,
+      show: false,
+    });
   };
   return (
     <>
@@ -111,6 +141,12 @@ export default function NominationForm() {
           </div>
         </div>
       </form>
+      <Modal
+        isActive={modal.show}
+        isSuccess={modal.success}
+        text={modal.message}
+        closeModal={closeModal}
+      />
     </>
   );
 }

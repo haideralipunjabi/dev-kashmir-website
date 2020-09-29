@@ -13,21 +13,22 @@ export default function LinksGroup(props) {
       ...inputs,
       [data.name]: data.value,
     }));
+    // console.log(inputs);
   };
-  useEffect(()=>{
-    for(let key of Object.keys(inputs)){
-      if(!inputs[key]){
+  useEffect(() => {
+    for (let key of Object.keys(inputs)) {
+      if (!inputs[key]) {
         delete inputs[key];
       }
     }
     onChange({
-      "persist": ()=>{},
-      "target":{
-        "name": "socialmedialinks",
-        "value": inputs
-      }
+      persist: () => {},
+      target: {
+        name: "socialmedialinks",
+        value: inputs,
+      },
     });
-  },[inputs])
+  }, [inputs]);
   useEffect(() => {
     setLinks((links) => [...links, <Link onChange={handleInputChange} />]);
   }, []);
