@@ -15,11 +15,6 @@ export default function Link(props) {
   };
   const handleInputChange = (event) => {
     event.persist();
-
-    // setInputs((inputs) => ({
-    //   ...inputs,
-    //   [event.target.name]: (event.target.name==="select")?Object.values(socialMediaLinksMap)[event.target.selectedIndex]:event.target.value,
-    // }));
     setInputs({
       select: Object.values(socialMediaLinksMap)[
         selectRef.current.selectedIndex
@@ -30,7 +25,7 @@ export default function Link(props) {
   useEffect(() => {
     onChange({
       name: inputs.select,
-      value: inputs.input,
+      value: ((inputs.select==="envelope")?"mailto:":"")+inputs.input,
     });
   }, [inputs]);
   return (

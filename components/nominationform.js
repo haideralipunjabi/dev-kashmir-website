@@ -65,7 +65,6 @@ export default function NominationForm() {
 
   const formRef = useRef();
   const validate = () => {
-    return true;
     return formRef.current.reportValidity();
   };
   const closeModal = () => {
