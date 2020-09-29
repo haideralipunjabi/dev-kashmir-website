@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 export default function Link(props) {
   const [inputs, setInputs] = useState({ select: "facebook", input: "" });
-  const { onChange } = props;
+  const { linkId,onChange } = props;
   const selectRef = useRef();
   const inputRef = useRef();
   const socialMediaLinksMap = {
@@ -24,8 +24,10 @@ export default function Link(props) {
   };
   useEffect(() => {
     onChange({
-      name: inputs.select,
-      value: ((inputs.select==="envelope")?"mailto:":"")+inputs.input,
+        id: linkId,
+        name: inputs.select,
+        value: ((inputs.select==="envelope")?"mailto:":"")+inputs.input,
+      
     });
   }, [inputs]);
   return (

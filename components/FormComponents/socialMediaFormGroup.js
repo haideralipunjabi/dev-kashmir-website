@@ -11,7 +11,10 @@ export default function LinksGroup(props) {
   const handleInputChange = (data) => {
     setInputs((inputs) => ({
       ...inputs,
-      [data.name]: data.value,
+      [data.id]:{
+        "name": data.name,
+        "value": data.value
+      }
     }));
     // console.log(inputs);
   };
@@ -25,12 +28,12 @@ export default function LinksGroup(props) {
       persist: () => {},
       target: {
         name: "socialmedialinks",
-        value: inputs,
+        value: Object.assign({},...Object.values(inputs).map(x=>({[x.name]: x.value}))),
       },
     });
   }, [inputs]);
   useEffect(() => {
-    setLinks((links) => [...links, <Link onChange={handleInputChange} />]);
+    setLinks((links) => [<Link linkId={0} onChange={handleInputChange} />]);
   }, []);
   return (
     <>
@@ -44,7 +47,7 @@ export default function LinksGroup(props) {
               e.preventDefault();
               setLinks((links) => [
                 ...links,
-                <Link onChange={handleInputChange} />,
+                <Link linkId={links.length} onChange={handleInputChange} />,
               ]);
             }}
           >
