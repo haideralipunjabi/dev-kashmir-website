@@ -57,6 +57,7 @@ export default function NominationForm() {
           type="url"
           label="Profile Picture"
           onChange={handleInputChange}
+          helpText="URL to your profile image, make sure it's square in dimension for best result"
         />
         <TextField label="Address" onChange={handleInputChange} required />
         <TextField
@@ -87,6 +88,7 @@ export default function NominationForm() {
           type="url"
           label="Workspace Picture"
           onChange={handleInputChange}
+          helpText="URL to your Workspace image, make sure it's 16:9 in dimension for best result"
         />
         <div className="field is-grouped">
           <div className="control">

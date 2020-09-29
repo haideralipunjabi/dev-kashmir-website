@@ -84,7 +84,25 @@ export default function Index({ children, frontMatter }) {
        <div className={`section content is-size-6`}>
          
         <div className="container">
-          
+          {
+            frontMatter.workspace_image &&
+            (<figure className="image is-16by9">
+            <picture>
+              <source
+                srcSet={require(`../public/images/workspace/${
+                  frontMatter.workspace_image}?webp`)}
+                alt={frontMatter.name}
+                type="image/webp"
+              />
+              <img
+                src={require(`../public/images/devs/${
+                  frontMatter.workspace_image
+                }`)}
+                alt={frontMatter.name}
+              />
+            </picture>
+          </figure>)
+          }
           {children}
           
           </div>
