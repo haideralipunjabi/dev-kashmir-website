@@ -19,6 +19,7 @@ export default function NominationForm() {
     if (Object.keys(inputs).includes("tags")) {
       inputs.tags = inputs.tags.split(",");
     }
+    return
     fetch("/api/postform", {
       method: "POST",
       body: JSON.stringify({
