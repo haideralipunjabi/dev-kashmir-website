@@ -2,7 +2,7 @@ import fetch from 'isomorphic-unfetch'
 import base64 from "base-64";
 
 module.exports = (req, res) => {
-    let url = "https://api.github.com/repos/haideralipunjabi/gtihub-actions-playground/actions/workflows/input.yml/dispatches"
+    let url = "https://api.github.com/repos/haideralipunjabi/dev-kashmir-website/actions/workflows/input.yml/dispatches"
     fetch(url, {
         method: "POST",
         mode: "cors",
