@@ -1,0 +1,35 @@
+name: Input
+on: 
+  workflow_dispatch:
+    inputs:
+      workflow_data:
+        description: "data"
+        required: true
+        default: ""
+      username:
+        description: "username"
+        required: true
+        default: ""
+jobs:
+  create-file:
+    runs-on: ubuntu-latest
+    env:
+      workflow_data: ${{ github.event.inputs.workflow_data }}
+      workspace: ${{ github.workspace }}
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm install
+        working-directory: ./.github/workflows/
+      - run: node create-mdx
+        working-directory: ./.github/workflows/
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch-suffix: "random"
+          branch: "dev-${{ github.event.inputs.username }}"
+          title: "Dev: ${{ github.event.inputs.username }}"
