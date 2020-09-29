@@ -5,7 +5,7 @@ export default function CardGrid(props) {
   const { devsFromProps } = props;
   return (
     <>
-      {(devsFromProps||devs).map((dev, idx) => {
+      {(devsFromProps||devs).filter(dev=>!dev.draft).map((dev, idx) => {
         return <Card data={dev}></Card>;
       })}
     </>
