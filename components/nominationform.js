@@ -7,8 +7,11 @@ import { useRef } from "react";
 
 export default function NominationForm() {
   function nominate() {
-  for(let key in Object.keys(inputs)){
-      if(!inputs[key]) delete inputs[key];
+    for (let key in Object.keys(inputs)) {
+      if (!inputs[key]) delete inputs[key];
+    }
+    if (Object.keys(inputs).includes("tags")) {
+      inputs.tags = inputs.tags.split(",");
     }
     fetch("/api/postform", {
       method: "POST",

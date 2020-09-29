@@ -52,7 +52,6 @@ const Questions = [
   "Who are you, and what do you do?",
   "What hardware do you use?",
   "What does your workspace look like?",
-  "Image of your workspace",
   "What software do you use?",
   "What programming language would you use if your life depended on it?",
   "What is your favourite food to have while programming?",
