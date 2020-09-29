@@ -7,23 +7,16 @@ import { useRef } from "react";
 
 export default function NominationForm() {
   function nominate() {
-    fetch("https://api.github.com/repos/haideralipunjabi/gtihub-actions-playground/actions/workflows/input.yml/dispatches",{
-      method:'POST',
-      mode:'cors',
-      headers:{
-        'Accept': 'application/vnd.github.v3+json',
-        "Authorization": `Basic ${base64.encode(`haideralipunjabi:`)}`
-
-      },
-      body:JSON.stringify({
-        "ref": "master",
-        "inputs":{
-            "workflow_data": JSON.stringify(inputs),
-            "username": inputs.name.toLowerCase().replace(/ /g, '')
-        }
-      })
-    })
-    console.log(inputs);
+    fetch("/api/postform", {
+      method: "POST",
+      body: JSON.stringify({
+        ref: "master",
+        inputs: {
+          workflow_data: JSON.stringify(inputs),
+          username: inputs.name.toLowerCase().replace(/ /g, ""),
+        },
+      }),
+    });
   }
   const { inputs, handleInputChange, handleSubmit } = useNominationForm(
     nominate
