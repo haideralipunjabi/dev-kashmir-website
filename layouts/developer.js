@@ -3,8 +3,14 @@ import styles from "./developer.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextSeo } from "next-seo";
 import Footer from "../components/footer";
+import Error from 'next/error'
 
 export default function Index({ children, frontMatter }) {
+  if(frontMatter.draft){
+    return(
+      <Error statusCode={404}/>
+    )
+  }
   return (
     <>
       <NextSeo
