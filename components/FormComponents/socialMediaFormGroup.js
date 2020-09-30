@@ -28,7 +28,7 @@ export default function LinksGroup(props) {
       persist: () => {},
       target: {
         name: "socialmedialinks",
-        value: Object.assign({},...Object.values(inputs).map(x=>({[x.name]: x.value}))),
+        value: inputs,
       },
     });
   }, [inputs]);
