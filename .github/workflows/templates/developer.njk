@@ -15,7 +15,7 @@ description: "{{ data.description }}"
 {% endif %}
 {%- if data.socialmedialinks -%}
 links:
-{%- for item in data.socialmedialinks %}
+{%- for id,item in data.socialmedialinks %}
   - name: "{{ item.name }}"
     url: "{{ item.value }}"
 {%- endfor -%}
