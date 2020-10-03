@@ -84,3 +84,15 @@ highlight {
 .footer {
   margin: 10rem 0 1rem;
 }
+input.input,
+textarea.textarea,
+.select > select {
+  color: black;
+}
+
+hr {
+  background-color: white;
+}
+input:invalid {
+  border: red;
+}

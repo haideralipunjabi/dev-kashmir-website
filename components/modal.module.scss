@@ -1,0 +1,9 @@
+@import "../styles/colors.scss";
+
+.success {
+    background-color: $app-primary;
+}
+
+.failed {
+    background-color: red;
+}

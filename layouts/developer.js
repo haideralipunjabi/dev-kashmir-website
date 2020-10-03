@@ -44,7 +44,7 @@ export default function Index({ children, frontMatter }) {
               <h2 className="title">{frontMatter.name}</h2>
               <h4 className="subtitle">{frontMatter.address}</h4>
               <div className={styles.tags}>
-                {frontMatter.tags.map((tag, idx) => (
+                {frontMatter.tags && frontMatter.tags.map((tag, idx) => (
                   <span
                     key={idx.toString()}
                     className={`tag is-rounded ${styles.tag}`}
@@ -54,7 +54,7 @@ export default function Index({ children, frontMatter }) {
                 ))}
               </div>
               <div className={styles.links}>
-                {frontMatter.links.map((link, idx) => {
+                {frontMatter.links && frontMatter.links.map((link, idx) => {
                   return (
                     <a
                       alt={link.name}
@@ -84,7 +84,25 @@ export default function Index({ children, frontMatter }) {
        <div className={`section content is-size-6`}>
          
         <div className="container">
-          
+          {
+            frontMatter.workspace_image &&
+            (<figure className="image is-16by9">
+            <picture>
+              <source
+                srcSet={require(`../public/images/workspace/${
+                  frontMatter.workspace_image}?webp`)}
+                alt={frontMatter.name}
+                type="image/webp"
+              />
+              <img
+                src={require(`../public/images/devs/${
+                  frontMatter.workspace_image
+                }`)}
+                alt={frontMatter.name}
+              />
+            </picture>
+          </figure>)
+          }
           {children}
           
           </div>
