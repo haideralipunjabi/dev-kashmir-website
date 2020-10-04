@@ -36,7 +36,7 @@ export default function Card(props) {
               </div>
               <div className="content">
                 <div className={styles.tags}>
-                  {data.tags && data.tags.map((tag, idx) => (
+                  {data.tags && data.tags.sort(() => 0.5 - Math.random()).slice(0,3).map((tag, idx) => (
                     <span
                       key={idx.toString()}
                       className={`tag is-rounded ${styles.tag}`}
